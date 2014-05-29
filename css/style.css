@@ -50,3 +50,7 @@ section li {
 section {
 	padding-top: 30px;
 }
+
+code {
+	color: white;
+}
