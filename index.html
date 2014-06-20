@@ -17,6 +17,7 @@
           <ul>
               <li class="pure-menu-selected"><a href="#hallo">Hallo</a></li>
               <li class="pure-menu-selected"><a href="#blatt3">Blatt 3</a></li>
+              <li class="pure-menu-selected"><a href="#blatt71">Blatt 7.1</a></li>
               <li class="pure-menu-selected"><a href="#links">Links</a></li>
           </ul>
         </nav>
@@ -56,6 +57,170 @@ W(Verein) =
           <p>Zuletzt zu den Telefonnummern. Da wir wollen, dass ein Verein viele (d.h. eine Menge an) Telefonnummern haben kann, besteht der Wertebereich aus der Potenzmenge des Wertebereiches einer Telefonnummer. Letzterer ist String, daher: <code>W(Telefonnr) = ℘(W(Telefon)) = ℘(String)</code>. Im Beispiel hat der erste Verein <code>{"012345689", "1234567890"} ⊆ ℘(String)</code>.</p>
         </section>
 
+        <a name="blatt71"></a>
+        <section class="pure-u-1-1">
+          <h1>Blatt 7.1</h1>
+          <p>Aufgabe 1 lässt sich super verstehen, wenn man sich ein Beispiel dazu anschaut. Dafür nehmen wir uns folgende Relation mit den Attributen PNR und Figur, links schon als Tabelle dargestellt und rechts in "mathematischer" Mengennotation.</p>
+          <div class="pure-g">
+            <div class="pure-u-1-2">
+              <table class="pure-table">
+                <caption>DA</caption>
+                <thead>
+                  <tr>
+                    <th>PNR</th>
+                    <th>Figur</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>1</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>"Woyzeck"</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>"Faust"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>"Woyzeck"</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"Faust"</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+              </table>
+            </div>
+            <div class="pure-u-1-2">
+              <code><pre>DA = {(1,"Wallenstein"), (1, "Woyzeck"),
+(1, "Faust"),<br />
+(2, "Wallenstein"),<br />
+(3, "Woyzeck"),<br />
+(4, "Faust"), (4, "Wallenstein")}</pre></code>
+            </div>
+          </div>
+          <p>Die Operatoren der relationalen Algebra haben als Parameter eine oder mehrere Relationen und ergeben wieder eine Relation. Als kleine Vorüberlegung schauen wir uns deshalb an, welche Relation bei den Ausdrücken folgenden Ausdrücken herauskommt.</p>
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <code><pre>&sigma;<sub>F OR W</sub>(<strong>DA</strong>)</pre></code>
+              <p>Hier wird für jede Zeile bzw. für jedes Tupel einzeln geprüft, ob das Prädikat <code>F OR W</code> erfüllt ist. Falls nicht, wird die Zeile bzw. das Tupel nicht zurückgegeben.</p>
+            </div>
+            <div class="pure-u-1-3">
+              <table class="pure-table">
+                <caption>Result</caption>
+                <thead>
+                  <tr>
+                    <th>PNR</th>
+                    <th>Figur</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>1</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>"Faust"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"Faust"</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"Wallenstein"</td>
+                </tr>
+              </table>
+            </div>
+            <div class="pure-u-1-3">
+              <code><pre>Result = {(1,"Wallenstein"),
+(1, "Faust"),<br />
+(2, "Wallenstein"),<br />
+(4, "Faust"), (4, "Wallenstein")}</pre></code>
+            </div>
+          </div>
+          <hr />
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <code><pre>&pi;<sub>PNR</sub>(&sigma;<sub>F OR W</sub>(<strong>DA</strong>))</pre></code>
+              <p>Bei dem Ergebnis der Selektion eben wird hiermit nur noch die Spalte PNR ausgewählt
+              bzw. aus den Tuplen werden alle Einträge außer das Attribut PNR entfernt.</p>
+              <p>Da wir hier von Mengen von Tuplen reden, haben entfernen wir mit der Projektion implizit auch Duplikate!</p>
+            </div>
+            <div class="pure-u-1-3">
+              <table class="pure-table">
+                <caption>Result</caption>
+                <thead>
+                  <tr>
+                    <th>PNR</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                </tr>
+              </table>
+            </div>
+            <div class="pure-u-1-3">
+              <code><pre>Result = {(1),(1),
+(2),
+(3),
+(4), (4)}
+= {(1), (2), (3), (4)}</pre></code>
+            </div>
+          </div>
+          <hr />
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <code><pre><strong>DA</strong> &#8211; &sigma;<sub>F OR W</sub>(<strong>DA</strong>)</pre></code>
+              <p>Das ist gerade das Komplement von der Selektion eben. Dementsprechend sind genau alle and</p>
+            </div>
+            <div class="pure-u-1-3">
+              <table class="pure-table">
+                <caption>Result</caption>
+                <thead>
+                  <tr>
+                    <th>PNR</th>
+                    <th>Figur</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>1</td>
+                  <td>"Woyzeck"</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>"Woyzeck"</td>
+                </tr>
+              </table>
+            </div>
+            <div class="pure-u-1-3">
+              <code><pre>Result = {(1,"Woyzeck"),
+(3, "Woyzeck")}</pre></code>
+            </div>
+          </div>
+          </section>
+        </section>
+
         <a name="links"></a>
         <section class="pure-u-1-1">
           <h1>Linkliste</h1>
@@ -91,3 +256,13 @@ W(Verein) =
     </footer>
   </body>
 </html>
+
+
+<!--
+<a name="hallo"></a>
+<section class="pure-u-1-1">
+  <h1>Hallo</h1>
+  <p>Hier wird es inofizielles Zeug für Informationssysteme geben, das mir im Zuge meiner Übung als sinnvoll erscheint.</p>
+  <p><strong>Letzte Änderung vom 29.05.:</strong> Wertebereich Beispiel.</p>
+</section>
+-->
