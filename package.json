@@ -1,0 +1,8 @@
+{
+  "name": "insy-ss2014",
+  "version": "0.0.0",
+  "description": "Random Website für die InSy-Übungen SS 2014",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
