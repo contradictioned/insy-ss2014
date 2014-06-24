@@ -1,0 +1,52 @@
+
+@import 'c13d_grid';
+@import 'c13d_font';
+@import 'nav';
+
+@import 'relations';
+
+section, main, header, nav, footer {
+  @include row();
+}
+
+* {
+  color: #e0f8fa;
+}
+
+header {
+  height:100px;
+}
+
+body {
+  background-color: #051e21;
+}
+
+main {
+  background-color: #082e29;
+}
+
+header, footer {
+  background-color: #082e29;
+}
+
+pre {
+  background-color: #051e21;
+  color: white;
+  font-family: 'courier new',monospace;
+}
+
+.block {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #183e39;
+}
+
+
+code > pre {
+  padding: 10px;
+  border-left: 14px solid #2a410c;
+  box-shadow: 1px 1px 5px #213409;
+}

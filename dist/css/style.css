@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box; }
+
+/* FLOATING */
+.col {
+  float: left; }
+
+/* columns */
+.half {
+  width: 50%; }
+
+.onethird {
+  width: 33.33334%; }
+
+.twothird {
+  width: 66.66667%; }
+
+.quarter {
+  width: 25%; }
+
+.threefourths {
+  width: 75%; }
+
+.goldenshort {
+  width: 38.2%; }
+
+.goldenlong {
+  width: 61.8%; }
+
+/* CLEARING */
+hr, p {
+  clear: both; }
+
+.row {
+  width: 100%;
+  max-width: 1000px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto; }
+  .row:before, .row:after {
+    display: block;
+    clear: both;
+    content: ""; }
+
+.col {
+  padding-left: 10px; }
+
+* {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', sans-serif; }
+
+h1 {
+  padding-top: 10px; }
+
+nav > ul > li {
+  float: left;
+  background-color: #466c14;
+  padding: 10px 5px 10px 5px;
+  list-style: none;
+  margin-right: 5px; }
+
+table.relation {
+  color: #d3f0ad;
+  border-collapse: collapse;
+  background-color: #466c14;
+  border: 1px solid #213409;
+  width: 100%;
+  box-shadow: 1px 1px 5px #213409; }
+  table.relation caption {
+    font-weight: bolder;
+    font-style: italic;
+    text-decoration: underline;
+    background-color: #466c14;
+    border: 1px solid #213409; }
+  table.relation thead {
+    font-weight: bold; }
+  table.relation td {
+    background-color: #2a410c;
+    padding: 0.3em;
+    border: 1px solid #213409; }
+  table.relation tr {
+    border: 1px solid #213409; }
+
+section, main, header, nav, footer {
+  width: 100%;
+  max-width: 1000px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto; }
+  section:before, section:after, main:before, main:after, header:before, header:after, nav:before, nav:after, footer:before, footer:after {
+    display: block;
+    clear: both;
+    content: ""; }
+
+* {
+  color: #e0f8fa; }
+
+header {
+  height: 100px; }
+
+body {
+  background-color: #051e21; }
+
+main {
+  background-color: #082e29; }
+
+header, footer {
+  background-color: #082e29; }
+
+pre {
+  background-color: #051e21;
+  color: white;
+  font-family: 'courier new',monospace; }
+
+.block {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #183e39; }
+
+code > pre {
+  padding: 10px;
+  border-left: 14px solid #2a410c;
+  box-shadow: 1px 1px 5px #213409; }

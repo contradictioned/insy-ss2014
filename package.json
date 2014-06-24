@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "description": "Random Website für die InSy-Übungen SS 2014",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "assemble": "^0.4.39",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-jade": "^0.12.0",
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-haml": "^0.9.0"
   }
 }

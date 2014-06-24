@@ -1,0 +1,129 @@
+extends ./layout.jade
+
+block content
+  a(name="blatt71")
+  section
+    h1 Blatt 7.1
+    p Aufgabe 1 lässt sich super verstehen, wenn man sich ein Beispiel dazu anschaut. Dafür nehmen wir uns folgende Relation mit den Attributen PNR und Figur, links schon als Tabelle dargestellt und rechts in "mathematischer" Mengennotation.
+    .block.row
+      .col.half
+        table.relation
+          caption DA
+          thead
+            tr
+              th PNR
+              th Figur
+          tr
+            td 1
+            td "Wallenstein"
+          tr
+            td 1
+            td "Woyzeck"
+          tr
+            td 1
+            td "Faust"
+          tr
+            td 2
+            td "Wallenstein"
+          tr
+            td 3
+            td "Woyzeck"
+          tr
+            td 4
+            td "Faust"
+          tr
+            td 4
+            td "Wallenstein"
+      .col.half
+        code
+          pre DA = {(1,"Wallenstein"),
+            | (1, "Woyzeck"),
+            | (1, "Faust"),
+            | (2, "Wallenstein"),
+            | (3, "Woyzeck"),
+            | (4, "Faust"),
+            | (4, "Wallenstein")}
+    p Die Operatoren der relationalen Algebra haben als Parameter eine oder mehrere Relationen und ergeben wieder eine Relation. Als kleine Vorüberlegung schauen wir uns deshalb an, welche Relation bei den Ausdrücken folgenden Ausdrücken herauskommt.</p>
+    
+    .block.row
+      .col.onethird
+        code
+          pre &sigma;<sub>F OR W</sub>(<strong>DA</strong>)
+        p Hier wird für jede Zeile bzw. für jedes Tupel einzeln geprüft, ob das Prädikat <code>F OR W</code> erfüllt ist. Falls nicht, wird die Zeile bzw. das Tupel nicht zurückgegeben.
+      .col.onethird
+        table.relation
+          caption Result
+          thead
+            tr
+              th PNR
+              th Figur
+          tr
+            td 1
+            td "Wallenstein"
+          tr
+            td 1
+            td "Faust"
+          tr
+            td 2
+            td "Wallenstein"
+          tr
+            td 4
+            td "Faust"
+          tr
+            td 4
+            td "Wallenstein"
+      .col.onethird   
+        code
+          pre Result = {(1,"Wallenstein"),
+            | (1, "Faust"),
+            | (2, "Wallenstein"),
+            | (4, "Faust"),
+            | (4, "Wallenstein")}
+    
+    .block.row
+      .col.onethird
+        code
+          pre &pi;<sub>PNR</sub>(&sigma;<sub>F OR W</sub>(<strong>DA</strong>))
+        p Bei dem Ergebnis der Selektion eben wird hiermit nur noch die Spalte PNR ausgewählt bzw. aus den Tuplen werden alle Einträge außer das Attribut PNR entfernt.
+        p Da wir hier von Mengen von Tuplen reden, haben entfernen wir mit der Projektion implizit auch Duplikate!
+      .col.onethird
+        table.relation
+          caption Result
+          thead
+            tr
+              th PNR
+          tr
+            td 1
+          tr
+            td 2
+          tr
+            td 4
+      .col.onethird
+        code
+          pre Result = {(1),(1),
+            | (2),
+            | (3),
+            | (4), (4)}
+            | = {(1), (2), (3), (4)}</pre></code>
+    .block.row
+      .col.onethird
+        code
+          pre <strong>DA</strong> &#8211; &sigma;<sub>F OR W</sub>(<strong>DA</strong>)
+        p Das ist gerade das Komplement von der Selektion eben. Dementsprechend sind genau alle and
+      .col.onethird
+        table.relation
+          caption Result
+          thead
+            tr
+              th PNR
+              th Figur
+          tr
+            td 1
+            td "Woyzeck"
+          tr
+            td 3
+            td "Woyzeck"
+      .col.onethird
+        code
+          pre Result = {(1,"Woyzeck"),
+            | (3, "Woyzeck")}

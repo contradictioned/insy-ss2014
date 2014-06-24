@@ -1,0 +1,69 @@
+extends ./layout.jade
+
+block content
+  article
+    section
+      h1 Relationenalgebra
+      p Auf dieser Seite kannst du Anfragen in Relationenalgebra untersuchen. Anfragen in Relationenalgebra können sein:
+        ul
+          li
+            code \sigma(prädikat, relation)
+          li
+            code \pi(attrlist, relation)
+          li
+            code \rho(name, relation)
+
+      h2 Relationen
+      .row.relation_digest
+          include example_relations/buch
+        .col.half
+          include example_relations/leser
+        .col.half
+          include example_relations/verlag
+        .col.half
+          include example_relations/exemplar
+        .col.half
+          include example_relations/ausleihe
+      //-.relation_digest
+        .col.half
+          include example_relations/pers
+        .col.half
+          include example_relations/abt
+        hr
+        .row
+          include example_relations/buch
+        .col.half
+          include example_relations/leser
+        .col.half
+          include example_relations/verlag
+        .col.half
+          include example_relations/exemplar
+        .col.half
+          include example_relations/ausleihe
+        hr
+        .col.half
+          include example_relations/kunde
+        .col.half
+          include example_relations/herst
+        .col.half
+          include example_relations/prod
+        .col.half
+          include example_relations/pv
+        .col.half
+          include example_relations/kkp
+        hr
+        .col.half
+          include example_relations/verein
+        .col.half
+          include example_relations/spieler
+        .col.half
+          include example_relations/trainer
+        hr
+        .col.half
+          include example_relations/professor
+        .col.half
+          include example_relations/student
+        .col.half
+          include example_relations/fachbereich
+        .col.half
+          include example_relations/pruefung

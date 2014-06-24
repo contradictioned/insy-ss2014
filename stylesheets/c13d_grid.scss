@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin row {
+  &:before, &:after { display: block; clear:both; content: '' }
+  width: 100%;
+  max-width:1000px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
+
+
+/* FLOATING */
+.col { float: left; }
+
+/* columns */
+.half {	width: 50%; }
+.onethird { width: 33.33334%; }
+.twothird { width: 66.66667%; }
+.quarter { width: 25%; }
+.threefourths { width: 75%; }
+.goldenshort { width: 38.2%;}
+.goldenlong { width: 61.8%; }
+
+/* CLEARING */
+hr, p { clear: both; }
+
+.row { @include row(); }
+.col { padding-left: 10px; }

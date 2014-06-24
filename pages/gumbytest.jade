@@ -1,0 +1,42 @@
+extends ./layout.jade
+
+block extra_header
+  link(rel="stylesheet", type="text/css", href="css/gumby.css")
+
+block content
+  br
+  br
+  br
+  br
+  br
+
+  header.row
+    .onethird
+      a InSy.SS.2014.MH
+    nav.twothirds
+      ul
+        li
+          a(href="/") Index
+        li
+          a(href="/wertebereiche.html") Blatt 3
+        li
+          a(href="/relationenbeispiel.html") Blatt 7.1
+        li
+          a(href="/links.html") Links
+
+  .row
+    .columns.six(style="background-color:#FCC") Testfoo
+    .columns.six(style="background-color:#CCF") Testbar
+  hr
+  .row
+    .columns.four(style="background-color:#FCC") Testfoo
+    .columns.four(style="background-color:#CFC") Testfoo
+    .columns.four(style="background-color:#CCF") Testfoo
+  hr
+  .row
+    .columns.four(style="background-color:#FCC") Testfoo
+    .columns.eight(style="background-color:#CFC") Testfoo
+  hr
+  .row
+    .columns.five(style="background-color:#CFC") Testfoo
+    .columns.seven(style="background-color:#FCC") Testfoo

@@ -1,0 +1,34 @@
+$darker-green: #466c14;
+$dark-green: #2a410c;
+$ligth: #d3f0ad;
+$border-color: #213409;
+
+table.relation {
+  color: $ligth;
+  border-collapse: collapse;
+  background-color: $darker-green;
+  border: 1px solid $border-color;
+  width: 100%;
+  box-shadow: 1px 1px 5px #213409;
+  
+  caption {
+    font-weight: bolder;
+    font-style: italic;
+    text-decoration: underline;
+    background-color: $darker-green;
+    border: 1px solid $border-color;
+  }
+
+  thead {
+    font-weight: bold;
+  }
+
+  td {
+    background-color: $dark-green;
+    padding: 0.3em;
+    border: 1px solid $border-color;
+  }
+  tr {
+    border: 1px solid $border-color;
+  }
+}
