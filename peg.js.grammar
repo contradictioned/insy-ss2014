@@ -76,7 +76,10 @@ predicate
 predicateOp
  = ('==' / '!=' / '<=' / '>=' / '<' / '>')
 predicateEl
- = attrName
+ = a:attrName { return "tuple['"+ a +"']"; } /* An attribute */
+ / "\""a:[^"]+"\"" { return "\"" + a.join("") + "\""; } /* A constant string */
+ / digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+
 
 /* Projection */
 
