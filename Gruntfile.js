@@ -19,18 +19,29 @@ module.exports = function(grunt) {
         } ]
       }
     },
+    uglify: {
+      options: {
+        beautify: true
+      }, 
+      dist: {
+        files: {
+          'dist/js/script.min.js': ['scripts/*.js']
+        }
+      }
+    },
     watch: {
       options: {
         livereload: true,
       },
-      files: ['pages/**/*', 'js/**/*', 'stylesheets/**/*'],
-      tasks: ['sass', 'jade'],
+      files: ['Gruntfile.js', 'pages/**/*', 'scripts/**/*', 'stylesheets/**/*'],
+      tasks: ['sass', 'jade', 'uglify'],
     },
   });
   
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-
-  grunt.registerTask('default', ['sass', 'jade']);
+  
+  grunt.registerTask('default', ['sass', 'jade', 'uglify']);
 };

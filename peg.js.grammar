@@ -1,0 +1,105 @@
+/* Grammar for PEG.js, 
+ * see http://pegjs.majda.cz/online
+ *
+ * Example expressions (should be valid)
+ *   \sigma[A==B](SomeRel)
+ *   \rho[A<-B](SomeRel)
+ *   \pi[A,B,C](SomeRel)
+ * Counterexamples (should not be valid)
+ *   \sigma[B](SomeRel)
+ */
+{
+  function BaseRelation(name) {
+    this.name = name;
+  }
+
+  function Selection(predicate, relation) {
+    this.predicate = predicate;
+    this.relation = relation;
+  }
+
+  function Projection(attrlist, relation) {
+    this.attrlist = attrlist;
+    this.relation = relation;
+  }
+
+  function Renaming(renaming, relation) {
+    this.renaming = renaming;
+    this.relation = relation;
+  }
+
+  function Cross(left, right) {
+    this.left = left;
+    this.right = right;
+  }
+  
+  function NaturalJoin(left, right) {
+    this.left = left;
+    this.right = right;
+  }
+
+  function ThetaJoin(left, right, pred) {
+    this.left = left;
+    this.right = right;
+    this.pred = pred;
+  }
+}
+
+
+start
+ = relation
+
+relation
+ = baseRelation
+ / selection
+ / projection
+ / renaming
+ / cross
+ / join
+
+baseRelation
+ = name:relationName { return new BaseRelation(name) }
+
+relationName
+ = chars:[a-zA-Z]+ { return chars.join("") }
+
+attrName
+ = rel:relationName '.' chars:[a-zA-Z]+ { return rel + '.' + chars.join("") }
+ / chars:[a-zA-Z]+ { return chars.join("") }
+
+
+/* Selection */
+selection
+ = '\\sigma['pred:predicate']('rel:relation')' { return new Selection(pred, rel) }
+predicate
+ = fst:predicateEl p:predicateOp snd:predicateEl { return Function("tuple", "return " + fst + p + snd) }
+predicateOp
+ = ('==' / '!=' / '<=' / '>=' / '<' / '>')
+predicateEl
+ = attrName
+
+/* Projection */
+
+projection
+ = '\\pi['atts:attrList']('rel:relation')' { return new Projection(atts, rel) }
+attrList
+ = fst:attrName ',' snd:attrList { return [fst].concat(snd) }
+ / fst:attrName  { return [fst] }
+
+
+/* Renaming */
+
+renaming
+ = '\\rho[' ren:renameOp '](' rel:relation ')' { return new Renaming(ren, rel) }
+
+renameOp
+ = chars:[a-zA-Z]+ '<-' snd:attrName { return chars.join("") + '<-' + snd }
+ / relationName
+
+/* Cross product */
+cross
+ = '(' fst:relation ')\\times(' snd:relation ')' { return new Cross(fst, snd) }
+
+join
+ = '(' fst:relation ')\\join[' pred:predicate '](' snd:relation ')' { return new ThetaJoin(fst, snd, pred) }
+ / '(' fst:relation ')\\join(' snd:relation ')' { return new NaturalJoin(fst, snd) }

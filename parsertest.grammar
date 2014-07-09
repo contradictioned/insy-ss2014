@@ -1,0 +1,6 @@
+\sigma[A==B](SomeRel)
+\sigma[A!=B](SomeRel)
+\sigma[A<=B](SomeRel)
+\sigma[A>=B](SomeRel)
+\sigma[A<B](SomeRel)
+\sigma[A>B](SomeRel)

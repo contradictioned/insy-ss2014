@@ -35,6 +35,10 @@ pre {
   font-family: 'courier new',monospace;
 }
 
+code {
+  font-family: 'courier new',monospace;
+}
+
 .block {
   border: 1px solid grey;
   border-radius: 5px;
@@ -49,4 +53,13 @@ code > pre {
   padding: 10px;
   border-left: 14px solid #2a410c;
   box-shadow: 1px 1px 5px #213409;
+}
+
+.toggle {
+  margin-left:10px;
+}
+
+#input {
+  background-color: #e0f8fa;
+  color: red;
 }

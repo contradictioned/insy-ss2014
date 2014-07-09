@@ -1,4 +1,4 @@
-function project(tuple, plist) {
+/*function project(tuple, plist) {
   for(var name in tuple) {
     if(plist.indexOf(name) == -1) {
       // Attribute name is not in plist, so it will be deleted
@@ -6,7 +6,7 @@ function project(tuple, plist) {
     }
   }
   return tuple
-}
+}*/
 
 /*
  * old is the old table
@@ -21,3 +21,4 @@ function applyProjection(oldT, newT, plist) {
   }
   fillTableWithTuples(newT, newtuples, plist);
 }
+

@@ -4,66 +4,68 @@ block content
   article
     section
       h1 Relationenalgebra
-      p Auf dieser Seite kannst du Anfragen in Relationenalgebra untersuchen. Anfragen in Relationenalgebra können sein:
-        ul
-          li
-            code \sigma(prädikat, relation)
-          li
-            code \pi(attrlist, relation)
-          li
-            code \rho(name, relation)
+      p Auf dieser Seite kannst du Anfragen in Relationenalgebra untersuchen.
+        | Da das Eingeben von Operatoren der Relationenalgebra ein wenig umständlich ist,
+        | wird hier eine leicht andere Form der Anfrage verwendet.
+      table
+        tr
+          td Die Selektion
+          td
+            code &sigma;<sub>präd</sub>(<strong>Rel</strong>)
+          td wird eingegeben als: 
+          td
+            code \sigma[präd](Rel)
+        tr
+          td(colspan=3)
+            | mit Prädikaten:&nbsp;
+            code  ==, !=, &lt;=, &gt;=
+            | &nbsp;z.B.:&nbsp;
+            code Verlag=="Oldenbourg"
+        tr
+          td Die Projektion
+          td
+            code &pi;<sub>a, b</sub>(<strong>Rel</strong>)
+          td wird eingegeben als: 
+          td
+            code \pi[a, b](Rel)
+        //
+          tr
+            td Die Umbenennung einer Spalte
+            td
+              code &rho;<sub>x &larr; a</sub>(<strong>Rel</strong>)
+            td wird eingegeben als: 
+            td
+              code \rho[x &lt;- a](Rel)
+          tr
+            td Die Umbenennung einer Relation
+            td
+              code &rho;<sub>B</sub>(<strong>Rel</strong>)
+            td wird eingegeben als: 
+            td
+              code \rho[B](Rel)
 
+        tr
+          td Kreuzprodukt zweier Relationen
+          td
+            code <strong>Rel1</strong> × <strong>Rel2</strong>
+          td wird eingegeben als: 
+          td
+            code (Rel1)\times(Rel2)
+        tr
+          td Natürlicher Join zweier Relationen
+          td
+            code <strong>Rel1</strong> ⋈ <strong>Rel2</strong>
+          td wird eingegeben als: 
+          td
+            code (Rel1)\join(Rel2)
+      p TODO: Umbenennungen mit &rho;, &theta;-Joins
       h2 Relationen
-      .row.relation_digest
-          include example_relations/buch
-        .col.half
-          include example_relations/leser
-        .col.half
-          include example_relations/verlag
-        .col.half
-          include example_relations/exemplar
-        .col.half
-          include example_relations/ausleihe
-      //-.relation_digest
-        .col.half
-          include example_relations/pers
-        .col.half
-          include example_relations/abt
-        hr
-        .row
-          include example_relations/buch
-        .col.half
-          include example_relations/leser
-        .col.half
-          include example_relations/verlag
-        .col.half
-          include example_relations/exemplar
-        .col.half
-          include example_relations/ausleihe
-        hr
-        .col.half
-          include example_relations/kunde
-        .col.half
-          include example_relations/herst
-        .col.half
-          include example_relations/prod
-        .col.half
-          include example_relations/pv
-        .col.half
-          include example_relations/kkp
-        hr
-        .col.half
-          include example_relations/verein
-        .col.half
-          include example_relations/spieler
-        .col.half
-          include example_relations/trainer
-        hr
-        .col.half
-          include example_relations/professor
-        .col.half
-          include example_relations/student
-        .col.half
-          include example_relations/fachbereich
-        .col.half
-          include example_relations/pruefung
+      include example_relations/all
+
+      h2 Spielwiese
+      p In dieses Feld kannst du die Anfragen wie oben beschrieben eingeben. Ein Klick auf GO rechnet die Anfrage aus.
+      input(type="text", id="input")
+      button(id="computeitlikeabauss") GO
+      p#error_output
+      div#result_output
+        h3 Ergebnis
