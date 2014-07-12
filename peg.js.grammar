@@ -23,7 +23,12 @@
     this.relation = relation;
   }
 
-  function Renaming(renaming, relation) {
+  function RelationRenaming(new_name, relation) {
+    this.new_name = new_name;
+    this.relation = relation;
+  }
+
+  function ColumnRenaming(renaming, relation) {
     this.renaming = renaming;
     this.relation = relation;
   }
@@ -53,7 +58,8 @@ relation
  = baseRelation
  / selection
  / projection
- / renaming
+ / relation_renaming
+ / column_renaming
  / cross
  / join
 
@@ -61,18 +67,18 @@ baseRelation
  = name:relationName { return new BaseRelation(name) }
 
 relationName
- = chars:[a-zA-Z]+ { return chars.join("") }
+ = chars:[a-zA-Z_]+ { return chars.join("") }
 
 attrName
- = rel:relationName '.' chars:[a-zA-Z]+ { return rel + '.' + chars.join("") }
- / chars:[a-zA-Z]+ { return chars.join("") }
+ = rel:relationName '.' chars:[a-zA-Z_]+ { return rel + '.' + chars.join("") }
+ / chars:[a-zA-Z_]+ { return chars.join("") }
 
 
 /* Selection */
 selection
  = '\\sigma['pred:predicate']('rel:relation')' { return new Selection(pred, rel) }
 predicate
- = fst:predicateEl p:predicateOp snd:predicateEl { return Function("tuple", "return " + fst + p + snd) }
+ = fst:predicateEl [ ]* p:predicateOp [ ]* snd:predicateEl { return Function("tuple", "return " + fst + p + snd) }
 predicateOp
  = ('==' / '!=' / '<=' / '>=' / '<' / '>')
 predicateEl
@@ -92,11 +98,18 @@ attrList
 
 /* Renaming */
 
-renaming
- = '\\rho[' ren:renameOp '](' rel:relation ')' { return new Renaming(ren, rel) }
+relation_renaming
+ = '\\rho[' ren:relationName '](' rel:relation ')' { return new RelationRenaming(ren, rel) }
+
+column_renaming
+ = '\\rho[' ren:renameOps '](' rel:relation ')' { return new ColumnRenaming(ren, rel) }
+
+renameOps
+ = op:renameOp [ ]* ',' [ ]* ops:renameOps { return [op].concat(ops) }
+ / op:renameOp               { return [op] }
 
 renameOp
- = chars:[a-zA-Z]+ '<-' snd:attrName { return chars.join("") + '<-' + snd }
+ = fst:attrName [ ]* '<-' [ ]* snd:attrName { return {newname: fst, oldname: snd} }
  / relationName
 
 /* Cross product */
