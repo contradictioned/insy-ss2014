@@ -1,21 +1,21 @@
 /*
  * Returns a new dom-table-element
  */
-function build_table(tuples, attrs) {
+function build_table(relation) {
   var table = document.createElement('table');
   table.classList.add('relation');
   
   var caption = document.createElement('caption');
   caption.innerHTML = 'RESULT';
   table.appendChild(caption);
-  
-  fillTableHeader(table, attrs);
+
+  fillTableHeader(table, relation.attributes);
 
   var tbody = document.createElement('tbody');
   table.appendChild(tbody);
   
-  for(var i = 0; i < tuples.length; i++) {
-    var el = createRow(tuples[i], attrs)
+  for(var i = 0; i < relation.tuples.length; i++) {
+    var el = createRow(relation.tuples[i], relation.attributes)
     tbody.appendChild(el);
   }
   return table;
@@ -40,7 +40,7 @@ function createRow(tuple, attrs) {
   var tr = document.createElement('tr');
   for(var i = 0; i < attrs.length; i++) {
     var td = document.createElement('td')
-    td.innerHTML = tuple[attrs[i]];
+    td.innerHTML = tuple.values[i];
     tr.appendChild(td)
   }
   return tr

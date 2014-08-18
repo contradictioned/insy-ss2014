@@ -58,15 +58,27 @@ function execQuery() {
     document.getElementById('error_output').innerHTML = e
   }
   result.eval();
-  var tuples = result.result
-  var attrs = result.attrs
-  var table = build_table(tuples, attrs);
+  var table = build_table(result.result);
   document.getElementById('result_output').appendChild(table);
 }
 
+function prepareExamples() {
+  var lis = document.getElementById("examples").getElementsByTagName("li");
+  for(var i = 0; i < lis.length; i++) {
+    lis[i].onclick = insertExample;
+  }
+}
+
+function insertExample() {
+  var str = this.innerHTML.replace("&lt;", "<");
+  str = str.replace("&gt;", ">");
+  document.getElementById('input').value = str;
+  execQuery();
+}
 
 window.onload = function() {
   makeTablesExpendable();
+  prepareExamples();
 
   // register query executing actions
   document.getElementById('computeitlikeabauss').onclick = execQuery;

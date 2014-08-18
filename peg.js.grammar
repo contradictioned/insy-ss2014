@@ -1,56 +1,3 @@
-/* Grammar for PEG.js, 
- * see http://pegjs.majda.cz/online
- *
- * Example expressions (should be valid)
- *   \sigma[A==B](SomeRel)
- *   \rho[A<-B](SomeRel)
- *   \pi[A,B,C](SomeRel)
- * Counterexamples (should not be valid)
- *   \sigma[B](SomeRel)
- */
-{
-  function BaseRelation(name) {
-    this.name = name;
-  }
-
-  function Selection(predicate, relation) {
-    this.predicate = predicate;
-    this.relation = relation;
-  }
-
-  function Projection(attrlist, relation) {
-    this.attrlist = attrlist;
-    this.relation = relation;
-  }
-
-  function RelationRenaming(new_name, relation) {
-    this.new_name = new_name;
-    this.relation = relation;
-  }
-
-  function ColumnRenaming(renaming, relation) {
-    this.renaming = renaming;
-    this.relation = relation;
-  }
-
-  function Cross(left, right) {
-    this.left = left;
-    this.right = right;
-  }
-  
-  function NaturalJoin(left, right) {
-    this.left = left;
-    this.right = right;
-  }
-
-  function ThetaJoin(left, right, pred) {
-    this.left = left;
-    this.right = right;
-    this.pred = pred;
-  }
-}
-
-
 start
  = relation
 
@@ -75,14 +22,15 @@ attrName
 
 
 /* Selection */
+
 selection
  = '\\sigma['pred:predicate']('rel:relation')' { return new Selection(pred, rel) }
 predicate
- = fst:predicateEl [ ]* p:predicateOp [ ]* snd:predicateEl { return Function("tuple", "return " + fst + p + snd) }
+ = fst:predicateEl [ ]* p:predicateOp [ ]* snd:predicateEl { return Function("tuple", "console.log(" + fst + p + snd + "); return " + fst + p + snd) }
 predicateOp
  = ('==' / '!=' / '<=' / '>=' / '<' / '>')
 predicateEl
- = a:attrName { return "tuple['"+ a +"']"; } /* An attribute */
+ = a:attrName { return "tuple.values[this.getAttr('"+ a +"')]"; } /* An attribute */
  / "\""a:[^"]+"\"" { return "\"" + a.join("") + "\""; } /* A constant string */
  / digits:[0-9]+ { return parseInt(digits.join(""), 10); }
 
@@ -92,7 +40,7 @@ predicateEl
 projection
  = '\\pi['atts:attrList']('rel:relation')' { return new Projection(atts, rel) }
 attrList
- = fst:attrName ',' snd:attrList { return [fst].concat(snd) }
+ = fst:attrName ','[ ]* snd:attrList { return [fst].concat(snd) }
  / fst:attrName  { return [fst] }
 
 
@@ -112,7 +60,9 @@ renameOp
  = fst:attrName [ ]* '<-' [ ]* snd:attrName { return {newname: fst, oldname: snd} }
  / relationName
 
+
 /* Cross product */
+
 cross
  = '(' fst:relation ')\\times(' snd:relation ')' { return new Cross(fst, snd) }
 

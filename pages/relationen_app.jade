@@ -8,59 +8,10 @@ block content
         strong Betabetrieb -- gimme Feedback plox!
       p Auf dieser Seite kannst du Anfragen in Relationenalgebra untersuchen.
         | Da das Eingeben von Operatoren der Relationenalgebra ein wenig umständlich ist,
-        | wird hier eine leicht andere Form der Anfrage verwendet.
-      table
-        tr
-          td Die Selektion
-          td
-            code &sigma;<sub>präd</sub>(<strong>Rel</strong>)
-          td wird eingegeben als: 
-          td
-            code \sigma[präd](Rel)
-        tr
-          td(colspan=3)
-            | mit Prädikaten:&nbsp;
-            code  ==, !=, &lt;=, &lt;, &gt;=, &gt;
-            | &nbsp;z.B.:&nbsp;
-            code Verlag=="Oldenbourg"
-        tr
-          td Die Projektion
-          td
-            code &pi;<sub>a, b</sub>(<strong>Rel</strong>)
-          td wird eingegeben als: 
-          td
-            code \pi[a, b](Rel)
-        //
-          tr
-            td Die Umbenennung einer Spalte
-            td
-              code &rho;<sub>x &larr; a</sub>(<strong>Rel</strong>)
-            td wird eingegeben als: 
-            td
-              code \rho[x &lt;- a](Rel)
-          tr
-            td Die Umbenennung einer Relation
-            td
-              code &rho;<sub>B</sub>(<strong>Rel</strong>)
-            td wird eingegeben als: 
-            td
-              code \rho[B](Rel)
-
-        tr
-          td Kreuzprodukt zweier Relationen
-          td
-            code <strong>Rel1</strong> × <strong>Rel2</strong>
-          td wird eingegeben als: 
-          td
-            code (Rel1)\times(Rel2)
-        tr
-          td Natürlicher Join zweier Relationen
-          td
-            code <strong>Rel1</strong> ⋈ <strong>Rel2</strong>
-          td wird eingegeben als: 
-          td
-            code (Rel1)\join(Rel2)
-      p TODO: Umbenennungen mit &rho;, &theta;-Joins
+        | wird hier eine leicht andere Form der Anfrage verwendet. Diese ist 
+        a(href="/relationen_anleitung.html") hier 
+        | dokumentiert.
+      
       h2 Relationen
       include example_relations/all
     hr
@@ -69,6 +20,13 @@ block content
       p In dieses Feld kannst du die Anfragen wie oben beschrieben eingeben. Ein Klick auf GO rechnet die Anfrage aus.
       input(type="text", id="input")
       button(id="computeitlikeabauss") GO
+      h3 Beispiele
+      ul#examples
+        li \sigma[Seitenzahl < 500](Buch)
+        li \sigma[Buch.Seitenzahl < 500](Buch)
+        li \sigma[Seitenzahl > 500](Buch)
+        li \sigma[Buch.Seitenzahl > 500](Buch)
+        li \pi[Titel, Verlag](Buch)
       p#error_output
       div#result_output
         h3 Ergebnis

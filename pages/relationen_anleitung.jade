@@ -1,0 +1,41 @@
+extends ./layout.jade
+
+block content
+  article
+    section
+      h1 Anleitung für Relationenalgebra
+      p Hier ist (hoffentlich ausreichend verständlich) dokumentiert, welche Teilmenge der Anfragesprache "Relationenalgebra" benutzt werden kann.
+
+      h2 Relation
+      p Eine Relation selbst ist bestandteil der Relationenalgebra. TODO: Besser dokumentieren.
+      p Beispiel: Wenn eine Relation Namens Buch im System bekannt ist, liefert diese Anfrage:
+        code Buch
+      | Die komplette Relation zurück.
+
+      h2 Selektion
+      p Die Selektion 
+        code &sigma;<sub>präd</sub>(<strong>Rel</strong>)
+        | wird eingegeben als: 
+        code \sigma[präd](Rel)
+      p Zur Zeit kann nur ein Prädikat eingegeben werden. Dabei wird folgende Syntax benutzt:
+        code  ==, !=, &lt;=, &lt;, &gt;=, &gt;
+        | Zum Beispiel
+        code Verlag=="Oldenbourg"
+
+      h2 Die Projektion 
+        code &pi;<sub>a, b</sub>(<strong>Rel</strong>)
+        | wird eingegeben als:
+        code \pi[a, b](Rel)
+
+      h2 Das Kreuzprodukt
+      p Kreuzprodukt zweier Relationen 
+        code <strong>Rel1</strong> × <strong>Rel2</strong>
+        | wird eingegeben als: 
+        code (Rel1)\times(Rel2)
+      
+      h2 Joins
+      p Der natürlicher Join zweier Relationen 
+        code <strong>Rel1</strong> ⋈ <strong>Rel2</strong>
+        | wird eingegeben als: 
+        code (Rel1)\join(Rel2)
+   
