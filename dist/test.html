@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Informationssysteme SS 2014</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+      function Relation() {
+        this.name = undefined;
+        this.attributes = undefined;
+        this.tuples = []
+      }
+      function Tuple(a, v) {
+        this.attributes = a;
+        this.values = v;
+      }
+
+      Relation.prototype.addTuple = function(values) {
+        var t = new Tuple(this.attributes, values)
+        this.tuples.push(t)
+      }
+
+
+      rel = new Relation();
+      rel.name = "Example"
+      rel.attributes = [["Example", "A"], ["Example", "B"], ["Example", "C"],]
+      rel.addTuple(["1", "eins", "hans"])
+      rel.addTuple(["2", "zwei", "olli"])
+      rel.addTuple(["3", "drei", "rolf"])
+      rel.addTuple(["4", "vier", "utah"])
+    </script>
+  </head>
+  <body>
+    
+  </body>
+</html>
